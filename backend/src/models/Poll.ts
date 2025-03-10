@@ -19,7 +19,7 @@ export type PollType = Document & {
   question: string;
   options: Option[];
   isYesNo: boolean;
-  expiresAt: Date;
+  expiresAt: string;
   isResultHide: boolean;
   isPrivate: boolean;
   reactions: Reactions;
@@ -36,8 +36,8 @@ const PollSchema = new Schema<PollType>({
     },
   ],
   isYesNo: { type: Boolean, default: false },
-  expiresAt: { type: Date, required: true },
-  isResultHide: { type: Boolean, default: false },
+  expiresAt: { type: String, required: true },
+  isResultHide: { type: Boolean, default: true },
   isPrivate: { type: Boolean, default: false },
   reactions: {
     like: { type: Number, default: 0 },
