@@ -17,6 +17,7 @@ type PollBody = {
   question: string;
   expiresAt: string;
   isYesNo: boolean;
+  isPrivate: boolean;
   options?: { text: string }[];
 };
 
@@ -46,6 +47,7 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
   const [poll, setPoll] = useState(initialState);
   const [options, setOptions] = useState(initialOptions);
   const [isYesNo, setIsYesNo] = useState(true);
+  const [isPrivate, setIsPrivate] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // handle poll create submit
@@ -55,6 +57,7 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
       question: poll.question,
       expiresAt: poll.expiresAt,
       isYesNo: isYesNo,
+      isPrivate: isPrivate,
     };
     if (!isYesNo) {
       pollBody['options'] = options.map((option) => ({ text: option.text }));
@@ -152,6 +155,19 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
               Add Option
             </Button>
           )}
+        </div>
+        {/* isPrivate button  */}
+        <div>
+          <input
+            type='checkbox'
+            checked={isPrivate}
+            onChange={() => setIsPrivate(!isPrivate)}
+            name='isPrivate'
+            id='isPrivate'
+          />
+          <label htmlFor='isPrivate' className='ml-2 cursor-pointer'>
+            I want to make this poll private
+          </label>
         </div>
         <Button
           type='submit'
