@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
 import { BASEURL } from '../components/constant';
 import { PollBody } from '../components/polls/CreatePollModal';
 
@@ -68,13 +69,23 @@ export const createPoll = async (pollBody: PollBody) => {
 };
 
 export const getPolls = async () => {
-  const response = await fetch(`${BASEURL}/polls?select=expiresAt`);
+  const response = await fetch(`${BASEURL}/polls?select=expiresAt`, {
+    next: {
+      revalidate: 3600,
+      tags: ['polls'],
+    },
+  });
   const data = await response.json();
   return data as GetPollsResponse;
 };
 
 export const getPollById = async (id: string) => {
-  const response = await fetch(`${BASEURL}/polls/${id}`);
+  const response = await fetch(`${BASEURL}/polls/${id}`, {
+    next: {
+      revalidate: 3600,
+      tags: ['poll'],
+    },
+  });
   const data = await response.json();
   return data as GetPollResponse;
 };
@@ -101,4 +112,12 @@ export const pollVote = async (id: string, optionText: string) => {
   });
   const data = await response.json();
   return data as PollVoteResponse;
+};
+
+export const revalidatePolls = async () => {
+  revalidateTag('polls');
+};
+
+export const revalidatePoll = async () => {
+  revalidateTag('poll');
 };

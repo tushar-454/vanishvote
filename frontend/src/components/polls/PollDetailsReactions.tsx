@@ -1,5 +1,5 @@
 'use client';
-import { pollReaction, Reactions } from '@/src/api/poll';
+import { pollReaction, Reactions, revalidatePoll, revalidatePolls } from '@/src/api/poll';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 
@@ -18,6 +18,8 @@ const PollDetailsReactions = ({ pollId, reactions }: PollDetailsReactionsProps) 
     if (reaction === 'trending') setTrending((prev) => prev + 1);
     try {
       await pollReaction(pollId, reaction);
+      await revalidatePoll();
+      await revalidatePolls();
     } catch (error) {
       console.error('Failed to submit reaction', error);
       if (reaction === 'like') setLike((prev) => prev - 1);

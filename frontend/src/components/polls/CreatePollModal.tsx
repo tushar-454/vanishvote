@@ -1,4 +1,4 @@
-import { createPoll } from '@/src/api/poll';
+import { createPoll, revalidatePolls } from '@/src/api/poll';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
@@ -62,10 +62,10 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
       setLoading(true);
       const response = await createPoll(pollBody);
       if (response.success) {
-        setShowModal(false);
+        await revalidatePolls();
+        router.push(`/polls/${response.data._id}`);
         setPoll(initialState);
         setOptions(initialOptions);
-        router.push(`/polls/${response.data._id}`);
       }
     } catch (error) {
       console.error('Error creating poll', error);

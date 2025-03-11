@@ -20,7 +20,7 @@ const PollCard = ({ poll }: PollCardProps) => {
       </div>
 
       <Link href={`/polls/${poll._id}`}>
-        <Button className='bg-green-600 text-white'>Vote Now</Button>
+        <Button className='bg-green-600 text-sm text-white'>Vote Now</Button>
       </Link>
     </div>
   );

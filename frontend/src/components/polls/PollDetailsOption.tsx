@@ -1,6 +1,6 @@
 'use client';
 
-import { Option, pollVote } from '@/src/api/poll';
+import { Option, pollVote, revalidatePoll, revalidatePolls } from '@/src/api/poll';
 import { useState } from 'react';
 import { TypographyP, TypographySmall } from '../ui/typography';
 
@@ -26,6 +26,8 @@ const PollDetailsOption = ({
     try {
       setVote(optionText);
       await pollVote(pollId, optionText);
+      await revalidatePolls();
+      await revalidatePoll();
     } catch (error) {
       console.error('Failed to submit vote', error);
       setVote('');

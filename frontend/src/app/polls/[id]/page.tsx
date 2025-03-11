@@ -1,4 +1,4 @@
-import { getPollById } from '@/src/api/poll';
+import { getPollById, getPolls } from '@/src/api/poll';
 import { CopyPollLink } from '@/src/components/polls/CopyPollLink';
 import { PollDetailsOption } from '@/src/components/polls/PollDetailsOption';
 import { PollDetailsReactions } from '@/src/components/polls/PollDetailsReactions';
@@ -7,9 +7,7 @@ import { Container } from '@/src/components/shared/Container';
 import { TypographyH3, TypographySmall } from '@/src/components/ui/typography';
 
 type PollDetailsProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
 const PollDetails = async ({ params }: PollDetailsProps) => {
@@ -55,3 +53,11 @@ const PollDetails = async ({ params }: PollDetailsProps) => {
 };
 
 export default PollDetails;
+
+export async function generateStaticParams() {
+  const res = await getPolls();
+  if (!res.success) null;
+  return res.data.map((poll) => ({
+    id: poll._id,
+  }));
+}
