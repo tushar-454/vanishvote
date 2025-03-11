@@ -14,15 +14,20 @@ type PollDetailsProps = {
 const PollDetails = async ({ params }: PollDetailsProps) => {
   const { id } = await params;
   const { success, data } = await getPollById(id);
-  const { question, options, reactions, comments, expiresAt, isResultHide } = data;
+  const { question, options, reactions, comments, expiresAt, isResultHide } = data || {};
   if (!success) {
     return <div className='mt-10 text-center text-red-500'>Failed to fetch poll</div>;
   }
   const totalVotes = options.reduce((acc, option) => acc + option.votes, 0);
   return (
-    <main className='min-h-screen bg-slate-100 py-10'>
+    <main
+      className='min-h-screen bg-slate-100 py-10'
+      style={{
+        backgroundImage: `url('https://res.cloudinary.com/karim-cloude/image/upload/v1741708211/anonymous_htqobj.svg')`,
+      }}
+    >
       <Container>
-        <div className='rounded-xl bg-white p-5'>
+        <div className='rounded-md bg-white p-5'>
           <div className='flex items-center justify-between gap-4'>
             <TypographyH3>{question}</TypographyH3>
             <CopyPollLink />
@@ -32,10 +37,11 @@ const PollDetails = async ({ params }: PollDetailsProps) => {
           </TypographySmall>
           <div>
             {options.map((option, index) => {
-              const percentage = ((option.votes / totalVotes) * 100).toFixed(0);
+              const percentage =
+                totalVotes > 0 ? ((option.votes / totalVotes) * 100).toFixed(0) : '0';
               return (
                 <PollDetailsOption
-                  key={option._id}
+                  key={option.text}
                   pollId={id}
                   option={option}
                   isResultHide={isResultHide}

@@ -62,12 +62,11 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
       setLoading(true);
       const response = await createPoll(pollBody);
       if (response.success) {
-        await revalidatePolls();
+        if (!isPrivate) await revalidatePolls();
         router.push(`/polls/${response.data._id}`);
       }
     } catch (error) {
       console.error('Error creating poll', error);
-    } finally {
       setLoading(false);
     }
   };

@@ -1,6 +1,8 @@
 'use client';
 
 import { pollComment, revalidatePoll, revalidatePolls } from '@/src/api/poll';
+
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -10,6 +12,7 @@ type CommentFormProps = {
 };
 
 const CommentForm = ({ pollId }: CommentFormProps) => {
+  const router = useRouter();
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
   // handle comment form submission
@@ -17,7 +20,8 @@ const CommentForm = ({ pollId }: CommentFormProps) => {
     e.preventDefault();
     try {
       setLoading(true);
-      await pollComment(pollId, comment);
+      const res = await pollComment(pollId, comment);
+      if (!res.success) router.push('/');
       await revalidatePoll();
       await revalidatePolls();
     } catch (error) {

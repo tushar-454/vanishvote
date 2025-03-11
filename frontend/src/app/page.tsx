@@ -4,7 +4,7 @@ import { Container } from '@/src/components/shared/Container';
 
 const Home = () => {
   return (
-    <main>
+    <main className='py-10'>
       <Container>
         <Header />
         <Polls />
