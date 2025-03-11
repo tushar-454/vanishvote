@@ -2,7 +2,7 @@ import { cn } from '@/src/lib/utils';
 import React from 'react';
 
 type InputProps = {
-  label: string;
+  label?: string;
   id: string;
   className?: string;
   placeholder?: string;
@@ -14,7 +14,7 @@ type InputProps = {
 
 const Input = ({ label, id, type = 'text', required, className, ...props }: InputProps) => {
   return (
-    <div>
+    <div className='w-full'>
       <label htmlFor={id} className='mb-1 block font-semibold text-gray-700'>
         {label} {required && <span className='text-red-500'>*</span>}
       </label>

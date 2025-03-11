@@ -1,5 +1,6 @@
 import { getPollById, getPolls } from '@/src/api/poll';
 import { CopyPollLink } from '@/src/components/polls/CopyPollLink';
+import { PollDetailsComments } from '@/src/components/polls/PollDetailsComments';
 import { PollDetailsOption } from '@/src/components/polls/PollDetailsOption';
 import { PollDetailsReactions } from '@/src/components/polls/PollDetailsReactions';
 import { PollExpireTime } from '@/src/components/polls/PollExpireTime';
@@ -19,7 +20,7 @@ const PollDetails = async ({ params }: PollDetailsProps) => {
   }
   const totalVotes = options.reduce((acc, option) => acc + option.votes, 0);
   return (
-    <main className='h-screen bg-slate-100'>
+    <main className='min-h-screen bg-slate-100 py-10'>
       <Container>
         <div className='rounded-xl bg-white p-5'>
           <div className='flex items-center justify-between gap-4'>
@@ -46,6 +47,7 @@ const PollDetails = async ({ params }: PollDetailsProps) => {
           </div>
 
           <PollDetailsReactions pollId={id} reactions={reactions} />
+          <PollDetailsComments pollId={id} comments={comments} />
         </div>
       </Container>
     </main>

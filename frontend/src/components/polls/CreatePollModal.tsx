@@ -64,8 +64,6 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
       if (response.success) {
         await revalidatePolls();
         router.push(`/polls/${response.data._id}`);
-        setPoll(initialState);
-        setOptions(initialOptions);
       }
     } catch (error) {
       console.error('Error creating poll', error);

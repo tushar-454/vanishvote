@@ -11,6 +11,7 @@ export type Option = {
 };
 
 export type Comment = {
+  _id?: string;
   text: string;
   createdAt: Date;
 };
@@ -69,7 +70,7 @@ export const createPoll = async (pollBody: PollBody) => {
 };
 
 export const getPolls = async () => {
-  const response = await fetch(`${BASEURL}/polls?select=expiresAt`, {
+  const response = await fetch(`${BASEURL}/polls?select=expiresAt,isResultHide`, {
     next: {
       revalidate: 3600,
       tags: ['polls'],
@@ -112,6 +113,18 @@ export const pollVote = async (id: string, optionText: string) => {
   });
   const data = await response.json();
   return data as PollVoteResponse;
+};
+
+export const pollComment = async (id: string, text: string) => {
+  const response = await fetch(`${BASEURL}/polls/${id}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ text }),
+  });
+  const data = await response.json();
+  return data as GetPollResponse;
 };
 
 export const revalidatePolls = async () => {
