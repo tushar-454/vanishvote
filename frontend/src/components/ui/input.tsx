@@ -15,7 +15,7 @@ type InputProps = {
 const Input = ({ label, id, type = 'text', required, className, ...props }: InputProps) => {
   return (
     <div className='w-full'>
-      <label htmlFor={id} className='mb-1 block font-semibold text-gray-700'>
+      <label htmlFor={id} className='mb-1 block font-semibold text-gray-700 dark:text-gray-300'>
         {label} {required && <span className='text-red-500'>*</span>}
       </label>
       <input
@@ -24,7 +24,7 @@ const Input = ({ label, id, type = 'text', required, className, ...props }: Inpu
         name={id}
         type={type}
         className={cn(
-          'w-full rounded border border-gray-200 p-2 outline-none focus:border-gray-300 dark:border-gray-500',
+          'w-full rounded border border-gray-200 p-2 outline-none focus:border-gray-300 dark:border-gray-400 dark:focus:border-gray-500',
           className,
         )}
         required={required}

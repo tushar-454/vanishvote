@@ -78,7 +78,7 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
   };
 
   return (
-    <div className='min-h-[768px] w-[768px] rounded-lg bg-white p-4 shadow-lg md:h-[768px]'>
+    <div className='min-h-[768px] w-[768px] rounded-lg bg-white p-4 shadow-lg md:h-[768px] dark:border dark:border-gray-500 dark:bg-neutral-900'>
       {/* form header  */}
       <div className='flex items-center justify-between border-b border-gray-200 pb-2 dark:border-gray-500'>
         <TypographyH3>Create Poll</TypographyH3>
