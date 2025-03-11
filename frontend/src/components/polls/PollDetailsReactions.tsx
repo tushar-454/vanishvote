@@ -34,13 +34,13 @@ const PollDetailsReactions = ({ pollId, reactions }: PollDetailsReactionsProps) 
       <div className='mt-5 flex gap-2'>
         <Button
           onClick={() => handleReaction('like')}
-          className='min-w-20 border border-gray-200 transition hover:bg-gray-50'
+          className='min-w-20 border border-gray-200 transition hover:bg-gray-50 dark:border-gray-500 dark:hover:bg-neutral-800'
         >
           👍 {like}
         </Button>
         <Button
           onClick={() => handleReaction('trending')}
-          className='min-w-20 border border-gray-200 transition hover:bg-gray-50'
+          className='min-w-20 border border-gray-200 transition hover:bg-gray-50 dark:border-gray-500 dark:hover:bg-neutral-800'
         >
           🔥 {trending}
         </Button>

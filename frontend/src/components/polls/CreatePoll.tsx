@@ -10,7 +10,7 @@ const CreatePoll = () => {
     <>
       <div>
         <Button
-          className='cursor-pointer bg-green-600 text-white'
+          className='cursor-pointer bg-green-600 text-white dark:bg-green-700'
           onClick={() => setShowModal(!showModal)}
         >
           Create Poll

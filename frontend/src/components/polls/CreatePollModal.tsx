@@ -80,9 +80,12 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
   return (
     <div className='min-h-[768px] w-[768px] rounded-lg bg-white p-4 shadow-lg md:h-[768px]'>
       {/* form header  */}
-      <div className='flex items-center justify-between border-b border-gray-200 pb-2'>
+      <div className='flex items-center justify-between border-b border-gray-200 pb-2 dark:border-gray-500'>
         <TypographyH3>Create Poll</TypographyH3>
-        <Button className='bg-red-600 text-white' onClick={() => setShowModal(false)}>
+        <Button
+          className='bg-red-600 text-white dark:bg-red-800'
+          onClick={() => setShowModal(false)}
+        >
           Close
         </Button>
       </div>
@@ -138,7 +141,7 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
             </label>
           </div>
           {!isYesNo && (
-            <Button className='bg-blue-600 text-white' onClick={handleAddOption}>
+            <Button className='bg-blue-600 text-white dark:bg-blue-800' onClick={handleAddOption}>
               Add Option
             </Button>
           )}
@@ -160,7 +163,7 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
           type='submit'
           loading={loading}
           disabled={loading}
-          className='bg-green-600 text-white'
+          className='bg-green-600 text-white dark:bg-green-700'
         >
           Create Poll
         </Button>

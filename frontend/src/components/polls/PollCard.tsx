@@ -10,7 +10,7 @@ type PollCardProps = {
 
 const PollCard = ({ poll }: PollCardProps) => {
   return (
-    <div className='flex flex-col gap-5 rounded-md border border-gray-100 p-4 shadow-md'>
+    <div className='flex flex-col gap-5 rounded-md border border-gray-100 p-4 shadow-md dark:border-gray-500 dark:bg-neutral-800'>
       <div>
         <TypographyH4>{poll.question}</TypographyH4>
         {poll.expiresAt ? <PollExpireTime expiresAt={poll.expiresAt} /> : 'N/A'}
@@ -20,7 +20,7 @@ const PollCard = ({ poll }: PollCardProps) => {
       </div>
 
       <Link href={`/polls/${poll._id}`}>
-        <Button className='bg-green-600 text-sm text-white'>
+        <Button className='bg-green-600 text-sm text-white dark:bg-green-700'>
           {!poll.isResultHide ? 'View Result' : 'Vote Now'}
         </Button>
       </Link>

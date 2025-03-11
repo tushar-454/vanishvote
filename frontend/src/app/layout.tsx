@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-neutral-800`}
         style={{
           backgroundImage: `url('https://res.cloudinary.com/karim-cloude/image/upload/v1741708211/anonymous_htqobj.svg')`,
         }}

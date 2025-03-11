@@ -21,13 +21,13 @@ const PollDetails = async ({ params }: PollDetailsProps) => {
   const totalVotes = options.reduce((acc, option) => acc + option.votes, 0);
   return (
     <main
-      className='min-h-screen bg-slate-100 py-10'
+      className='min-h-screen bg-slate-100 py-10 dark:bg-neutral-800'
       style={{
         backgroundImage: `url('https://res.cloudinary.com/karim-cloude/image/upload/v1741708211/anonymous_htqobj.svg')`,
       }}
     >
       <Container>
-        <div className='rounded-md bg-white p-5'>
+        <div className='rounded-md bg-white p-5 dark:bg-neutral-900'>
           <div className='flex items-center justify-between gap-4'>
             <TypographyH3>{question}</TypographyH3>
             <CopyPollLink />

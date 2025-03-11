@@ -18,9 +18,9 @@ const PollDetailsComments = ({ pollId, comments }: PollDetailsCommentsProps) => 
         {comments.reverse().map((comment) => (
           <div
             key={comment._id}
-            className='mt-4 flex gap-4 rounded-xs p-2 transition hover:bg-gray-100'
+            className='mt-4 flex gap-4 rounded-xs p-2 transition hover:bg-neutral-700 dark:hover:bg-gray-800'
           >
-            <span className='flex items-center justify-center rounded-full bg-gray-200 p-2'>
+            <span className='flex items-center justify-center rounded-full bg-gray-200 p-2 dark:bg-gray-500'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 version='1.1'

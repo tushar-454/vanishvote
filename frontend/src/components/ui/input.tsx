@@ -24,7 +24,7 @@ const Input = ({ label, id, type = 'text', required, className, ...props }: Inpu
         name={id}
         type={type}
         className={cn(
-          'w-full rounded border border-gray-200 p-2 outline-none focus:border-gray-300',
+          'w-full rounded border border-gray-200 p-2 outline-none focus:border-gray-300 dark:border-gray-500',
           className,
         )}
         required={required}

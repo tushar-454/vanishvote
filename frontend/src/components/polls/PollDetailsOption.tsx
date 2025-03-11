@@ -41,11 +41,11 @@ const PollDetailsOption = ({
     <div>
       <TypographyP
         onClick={() => handlePollVote(option.text)}
-        className={`relative mt-3 w-full rounded-md border border-gray-200 p-2 transition ${vote !== option.text ? 'hover:bg-gray-200' : 'hover:bg-green-100'} ${isResultHide && 'cursor-pointer'} ${vote === option.text && 'bg-green-100'}`}
+        className={`relative mt-3 w-full rounded-md border border-gray-200 p-2 transition dark:border-gray-500 dark:hover:bg-neutral-800 ${vote !== option.text ? 'hover:bg-gray-200' : 'hover:bg-green-100'} ${isResultHide && 'cursor-pointer'} ${vote === option.text && 'bg-green-100 dark:bg-neutral-800'}`}
       >
         {!isResultHide && (
           <span
-            className={`absolute top-0 left-0 h-full rounded-md bg-black opacity-20`}
+            className={`absolute top-0 left-0 h-full rounded-md bg-black opacity-20 dark:bg-white dark:opacity-10`}
             style={{ width: `${percentage}%` }}
           ></span>
         )}

@@ -44,7 +44,7 @@ const CommentForm = ({ pollId }: CommentFormProps) => {
       />
       <Button
         type='submit'
-        className='mt-1 rounded-l-none border border-green-600 bg-green-600 py-3 text-white'
+        className='mt-1 rounded-l-none border border-green-600 bg-green-600 py-3 text-white dark:border-green-700 dark:bg-green-700'
         loading={loading}
         disabled={loading}
       >
