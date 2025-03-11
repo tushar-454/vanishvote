@@ -1,6 +1,7 @@
 'use server';
 
 import { BASEURL } from '../components/constant';
+import { PollBody } from '../components/polls/CreatePollModal';
 
 export type Option = {
   _id: string;
@@ -31,6 +32,12 @@ export type PollType = {
   createdAt: Date;
 };
 
+type CreatePollResponse = {
+  success: boolean;
+  message: string;
+  data: PollType;
+};
+
 type GetPollsResponse = {
   success: boolean;
   message: string;
@@ -41,6 +48,23 @@ type GetPollResponse = {
   success: boolean;
   message: string;
   data: PollType;
+};
+
+type PollVoteResponse = {
+  success: boolean;
+  message: string;
+};
+
+export const createPoll = async (pollBody: PollBody) => {
+  const response = await fetch(`${BASEURL}/polls`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(pollBody),
+  });
+  const data = await response.json();
+  return data as CreatePollResponse;
 };
 
 export const getPolls = async () => {
@@ -65,4 +89,16 @@ export const pollReaction = async (id: string, reaction: 'like' | 'trending') =>
   });
   const data = await response.json();
   return data as GetPollResponse;
+};
+
+export const pollVote = async (id: string, optionText: string) => {
+  const response = await fetch(`${BASEURL}/polls/${id}/vote`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ optionText }),
+  });
+  const data = await response.json();
+  return data as PollVoteResponse;
 };

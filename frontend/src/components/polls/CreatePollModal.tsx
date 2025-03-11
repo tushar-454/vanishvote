@@ -1,4 +1,5 @@
-import { fetchAPI } from '@/src/lib/utils';
+import { createPoll } from '@/src/api/poll';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -13,18 +14,12 @@ type InitialStateType = {
   expiresAt: string;
 };
 
-type PollBody = {
+export type PollBody = {
   question: string;
   expiresAt: string;
   isYesNo: boolean;
   isPrivate: boolean;
   options?: { text: string }[];
-};
-
-type CreatePollResponse = {
-  success: boolean;
-  message: string;
-  data: [];
 };
 
 const initialState: InitialStateType = {
@@ -44,6 +39,7 @@ const initialOptions = [
 ];
 
 const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
+  const router = useRouter();
   const [poll, setPoll] = useState(initialState);
   const [options, setOptions] = useState(initialOptions);
   const [isYesNo, setIsYesNo] = useState(true);
@@ -64,18 +60,12 @@ const CreatePollModal = ({ setShowModal }: CreatePollModalProps) => {
     }
     try {
       setLoading(true);
-      const response = await fetchAPI<CreatePollResponse>('/polls', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(pollBody),
-      });
-
+      const response = await createPoll(pollBody);
       if (response.success) {
         setShowModal(false);
         setPoll(initialState);
         setOptions(initialOptions);
+        router.push(`/polls/${response.data._id}`);
       }
     } catch (error) {
       console.error('Error creating poll', error);

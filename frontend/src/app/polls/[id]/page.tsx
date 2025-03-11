@@ -1,8 +1,10 @@
 import { getPollById } from '@/src/api/poll';
+import { CopyPollLink } from '@/src/components/polls/CopyPollLink';
 import { PollDetailsOption } from '@/src/components/polls/PollDetailsOption';
 import { PollDetailsReactions } from '@/src/components/polls/PollDetailsReactions';
+import { PollExpireTime } from '@/src/components/polls/PollExpireTime';
 import { Container } from '@/src/components/shared/Container';
-import { TypographyH3 } from '@/src/components/ui/typography';
+import { TypographyH3, TypographySmall } from '@/src/components/ui/typography';
 
 type PollDetailsProps = {
   params: {
@@ -22,13 +24,20 @@ const PollDetails = async ({ params }: PollDetailsProps) => {
     <main className='h-screen bg-slate-100'>
       <Container>
         <div className='rounded-xl bg-white p-5'>
-          <TypographyH3>{question}</TypographyH3>
+          <div className='flex items-center justify-between gap-4'>
+            <TypographyH3>{question}</TypographyH3>
+            <CopyPollLink />
+          </div>
+          <TypographySmall className='mt-2'>
+            {expiresAt ? <PollExpireTime expiresAt={expiresAt} /> : 'N/A'}
+          </TypographySmall>
           <div>
             {options.map((option, index) => {
               const percentage = ((option.votes / totalVotes) * 100).toFixed(0);
               return (
                 <PollDetailsOption
                   key={option._id}
+                  pollId={id}
                   option={option}
                   isResultHide={isResultHide}
                   idx={index}

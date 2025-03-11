@@ -1,17 +1,42 @@
-import { Option } from '@/src/api/poll';
+'use client';
+
+import { Option, pollVote } from '@/src/api/poll';
+import { useState } from 'react';
 import { TypographyP, TypographySmall } from '../ui/typography';
 
 type PollDetailsOptionProps = {
+  pollId: string;
   option: Option;
   isResultHide: boolean;
   percentage: string;
   idx: number;
 };
-const PollDetailsOption = ({ option, isResultHide, percentage, idx }: PollDetailsOptionProps) => {
+const PollDetailsOption = ({
+  pollId,
+  option,
+  isResultHide,
+  percentage,
+  idx,
+}: PollDetailsOptionProps) => {
+  const [vote, setVote] = useState('');
+
+  // handle poll vote
+  const handlePollVote = async (optionText: string) => {
+    if (!isResultHide || vote) return;
+    try {
+      setVote(optionText);
+      await pollVote(pollId, optionText);
+    } catch (error) {
+      console.error('Failed to submit vote', error);
+      setVote('');
+    }
+  };
+
   return (
     <div>
       <TypographyP
-        className={`relative mt-3 w-full rounded-md border border-gray-200 p-2 transition hover:bg-gray-100 ${isResultHide && 'cursor-pointer'}`}
+        onClick={() => handlePollVote(option.text)}
+        className={`relative mt-3 w-full rounded-md border border-gray-200 p-2 transition hover:bg-gray-200 ${isResultHide && 'cursor-pointer'} ${vote === option.text && 'bg-gray-200'}`}
       >
         {!isResultHide && (
           <span
