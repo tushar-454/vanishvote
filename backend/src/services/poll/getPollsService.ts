@@ -1,8 +1,12 @@
 import { Poll, PollType } from '../../models/Poll';
 
-const getPollsService = async (): Promise<PollType[] | undefined> => {
+type TGetPollsService = {
+  selectedFields: string;
+};
+
+const getPollsService = async ({ selectedFields }: TGetPollsService): Promise<PollType[] | undefined> => {
   try {
-    const polls = await Poll.find({ isPrivate: false }).sort({ createdAt: -1 }).select('-comments -isPrivate -options -isYesNo -expiresAt -isResultHide -createdAt -__v');
+    const polls = await Poll.find({ isPrivate: false }).sort({ createdAt: -1 }).select(selectedFields);
     return polls || [];
   } catch (error) {
     if (error instanceof Error) {
