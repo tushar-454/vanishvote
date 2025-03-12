@@ -1,8 +1,17 @@
 'use client';
 import { TypographySmall } from '../ui/typography';
 
-const PollExpireTime = ({ expiresAt }: { expiresAt: string }) => {
-  return <TypographySmall>Expire At: {new Date(expiresAt).toLocaleString()}</TypographySmall>;
+type PollExpireTimeProps = {
+  expiresAt: string;
+  label?: string;
+};
+
+const PollExpireTime = ({ expiresAt, label = 'Expire At' }: PollExpireTimeProps) => {
+  return (
+    <TypographySmall>
+      {label}: {new Date(expiresAt).toLocaleString()}
+    </TypographySmall>
+  );
 };
 
 export { PollExpireTime };

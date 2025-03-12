@@ -33,7 +33,7 @@ const CommentForm = ({ pollId }: CommentFormProps) => {
   };
 
   return (
-    <form onSubmit={handleCommentSubmit} className='flex w-full items-center'>
+    <form onSubmit={handleCommentSubmit} className='mt-3 flex w-full items-center'>
       <Input
         id='comment'
         type='text'
@@ -41,10 +41,11 @@ const CommentForm = ({ pollId }: CommentFormProps) => {
         className='rounded-r-none py-3'
         value={comment}
         onChange={(e) => setComment(e.target.value)}
+        required
       />
       <Button
         type='submit'
-        className='mt-1 rounded-l-none border border-green-600 bg-green-600 py-3 text-white dark:border-green-700 dark:bg-green-700'
+        className='rounded-l-none border border-green-600 bg-green-600 py-3 text-white dark:border-green-700 dark:bg-green-700'
         loading={loading}
         disabled={loading}
       >

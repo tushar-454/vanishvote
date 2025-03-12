@@ -1,5 +1,5 @@
 'use client';
-import { pollReaction, Reactions, revalidatePoll } from '@/src/api/poll';
+import { pollReaction, Reactions, revalidatePoll, revalidatePolls } from '@/src/api/poll';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
@@ -22,6 +22,7 @@ const PollDetailsReactions = ({ pollId, reactions }: PollDetailsReactionsProps) 
       const res = await pollReaction(pollId, reaction);
       if (!res.success) router.push('/');
       await revalidatePoll();
+      await revalidatePolls();
     } catch (error) {
       console.error('Failed to submit reaction', error);
       if (reaction === 'like') setLike((prev) => prev - 1);

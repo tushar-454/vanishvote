@@ -1,6 +1,7 @@
 import { Comment } from '@/src/api/poll';
 import { TypographyH4, TypographyMuted, TypographyP } from '../ui/typography';
 import { CommentForm } from './CommentForm';
+import { PollExpireTime } from './PollExpireTime';
 
 type PollDetailsCommentsProps = {
   pollId: string;
@@ -20,7 +21,7 @@ const PollDetailsComments = ({ pollId, comments }: PollDetailsCommentsProps) => 
             key={comment._id}
             className='mt-4 flex gap-4 rounded-xs p-2 transition hover:bg-neutral-700 dark:hover:bg-gray-800'
           >
-            <span className='flex items-center justify-center rounded-full bg-gray-200 p-2 dark:bg-gray-500'>
+            <span className='grid size-12 place-content-center rounded-full bg-gray-200 p-2 dark:bg-gray-500'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 version='1.1'
@@ -46,8 +47,10 @@ const PollDetailsComments = ({ pollId, comments }: PollDetailsCommentsProps) => 
             </span>
 
             <div>
-              <TypographyP>{comment.text}</TypographyP>
-              <TypographyMuted>{new Date(comment.createdAt).toLocaleString()}</TypographyMuted>
+              <TypographyP className='mb-2 leading-6'>{comment.text}</TypographyP>
+              <TypographyMuted>
+                <PollExpireTime expiresAt={comment.createdAt.toString()} label='Date & Time' />
+              </TypographyMuted>
             </div>
           </div>
         ))}
